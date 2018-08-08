@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20171121182849) do
     t.string   "activity",             default: "neutral"
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
-    t.string   "symbol",               default: "neutral"
     t.string   "immigration_activity", default: "i_neutral"
     t.string   "gun_control_activity", default: "gc_neutral"
     t.string   "environment_activity", default: "e_neutral"

@@ -4,6 +4,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'simplecov'
+require 'simplecov-cobertura'
+SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
 SimpleCov.start
 
 # Requires supporting ruby files with custom matchers and macros, etc,
