@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.9'
+gem 'simplecov-cobertura'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -57,10 +58,11 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '2.14'
+  gem 'rspec-rails', '3.4.2'
   gem 'simplecov', :require => false
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels'
+  gem "factory_bot_rails", '~> 4.8.2'
   gem 'database_cleaner'
   gem 'autotest-rails'
   gem 'metric_fu'
