@@ -1,34 +1,16 @@
 class MapController < ApplicationController
   def index
-    @states = State.all
-    @map = params[:map] || ""
-    @states.each do |state|
-      if @map == "immigration_activity"
-        state.activity = state.immigration_activity
-      elsif @map == "gun_control_activity"
-        state.activity = state.gun_control_activity
-      elsif @map == "environment_activity"
-        state.activity = state.environment_activity
-      end
-    end
-        
+    flash[:notice] = params[:map] || ""
+    @map = params[:map] || "immigration_activity"
+    @states = State.get_states_with_activity(@map)
   end
 
   def state
-    @counties = {}
     states_id = State.where(symbol: params[:state]).first.id
-    @map = params[:map]||""
-    County.where(states_id: states_id).each do |county|
-      @counties[county.name] = county.activity
-      if @map == "immigration_activity"
-        @counties[county.name] = county.immigration_activity
-      elsif @map == "gun_control_activity"
-        @counties[county.name] = county.gun_control_activity
-      elsif @map == "environment_activity"
-        @counties[county.name] = county.environment_activity
-      end
-      puts @counties[county.name]
-    end
+    @map = params[:map] || ""
+    flash[:notice] = params[:map]
+    @counties = County.get_counties_in_state(states_id)
+    @counties = County.get_counties_with_activity(@counties, @map)
     render "map/#{params[:state].downcase}"
   end
 end

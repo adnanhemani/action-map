@@ -1,17 +1,14 @@
-<ul>
-  <li><a href="/">Map</a></li>
-  <li><a href="/events">Events</a></li>
-  <% if current_user %>
-    <li style="float:right"><a class="active" href="/logout">Logout</a></li>
-    <li style="float:right"><a class="active" href="<%=edit_user_path(current_user)%>">Profile</a></li>
-  <% else %>
-    <li style="float:right"><a class="active" href="/login">Login</a></li>
-  <% end %>
-</ul>
+<%= render "shared/navbar" %>
 
 
 <h1>Add New Event</h1>
 
+<% flash.each do |name, msg| -%>
+  <% if name == "state" or name == "date" %>
+    <%= content_tag :div, msg, class: name, style: "color:red" %>
+    <br><br>
+  <% end -%>
+<% end -%>
 
 <%= form_tag(events_path) do %>
 
@@ -19,7 +16,7 @@
   <%= text_field :event, :name %>
   <br><br>
   <%= label :event, :state, "State:" %>
-  <%= text_field :event, :state %>
+  <%= select_tag :state, options_for_select(us_states), {:prompt => "Select a State"}%>
   <br><br>
   <%= label :event, :county, "County:" %>
   <%= text_field :event, :county %>
@@ -34,5 +31,5 @@
   <%= text_area :event, :description %>
   <br><br>
   <%= submit_tag "Add Event" %>
-  
+
 <% end %>

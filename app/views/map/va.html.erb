@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ul>
-  <li><%=link_to "Immigration Map", state_map_path(:map=>"immigration_activity")%></li>
-  <li><%=link_to "Gun Control Map", state_map_path(:map=>"gun_control_activity")%></li>
-  <li><%=link_to "Environment Map", state_map_path(:map=>"environment_activity")%></li>
-  <li><%=link_to "Back to Country Map", root_path(:map=>@map)%></li>
+<%= render "shared/navbar" %>
 
-  <li><a href="">Events</a></li>
-  <% if current_user %>
-    <li style="float:right"><a class="active" href="/logout">Logout</a></li>
-    <li style="float:right"><a class="active" href="<%=edit_user_path(current_user)%>">Profile</a></li>
-  <% else %>
-    <li style="float:right"><a class="active" href="/login">Login</a></li>
-  <% end %>
-</ul>
+<section id="works" class="works">
+                <div class="container">
+                    <div class="section-heading">
+                        <h1 class="title wow fadeInDown" data-wow-delay=".3s">Virginia Map</h1>
+                        <p class="wow fadeInDown" data-wow-delay=".5s">
+                            <%= @map[0..-10].gsub(/_/, " ") + " policies" %>
+                        </p>
+                    </div>
 
 <div id="info-box"></div>
 
@@ -429,8 +425,8 @@
 <%= javascript_include_tag "map.js" %>
 <script>
 var counties = {}
-<% @counties.each do |county, activity| %>
-	counties['#<%= county %>'] = '<%= activity %>'
+<% @counties.each do |county| %>
+	counties['#<%= county.name %>'] = '<%= county.activity %>'
 <% end %>
 $.each(counties, function(county, activity) {
 	$(county).each(function() {

@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-  <title>Bootstrap Theme Simply Me</title>
+  <title>Representative</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -10,16 +10,7 @@
 </head>
 <body>
 
-<ul>
-  <li><a href="/">Map</a></li>
-  <li><a href="">Events</a></li>
-  <% if current_user %>
-    <li style="float:right"><a class="active" href="/logout">Logout</a></li>
-    <li style="float:right"><a class="active" href="<%=edit_user_path(current_user)%>">Profile</a></li>
-  <% else %>
-    <li style="float:right"><a class="active" href="/login">Login</a></li>
-  <% end %>
-</ul>
+<%= render "shared/navbar" %>
 
 <% if @not_found %>
 	<div class="container-fluid not_found text-center row">
